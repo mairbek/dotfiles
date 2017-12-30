@@ -1,0 +1,274 @@
+
+" Put temp swap files in ~/tmp/vim_tmp
+let g:enable_local_swap_dirs = 1
+
+" Bundles
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#rc()
+
+"let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+Bundle 'SuperTab'
+Bundle 'The-NERD-tree'
+Bundle 'comments.vim'
+Bundle 'https://github.com/kien/ctrlp.vim'
+" Bundle 'minibufexpl.vim'
+" Bundle 'mru.vim'
+Bundle 'molokai'
+" camel case motion
+Bundle 'camelcasemotion'
+Bundle 'YankRing.vim'
+map w <Plug>CamelCaseMotion_w
+map b <Plug>CamelCaseMotion_b
+map e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
+
+syntax on
+set t_co=256
+set nocompatible
+set paste
+set autoindent
+set number
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set smarttab
+set directory=~/.vimbak
+set backup writebackup
+set backupdir=~/.vimbak
+set backupskip=/tmp/*,/var/tmp/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*
+set history=900          " Store last 200 commands as history.
+" Store in .viminfo: marks for 50 files, 200 lines of registers.
+set viminfo='50,\"200
+set updatecount=40       " Number of characters typed before updating swapfile.
+set updatetime=5000      " Milliseconds before updating swapfile.
+set suffixes=.bak,~,.o,.swp
+" Nice helper stuff:
+set showmode
+set showmatch
+set ruler
+set incsearch
+set hlsearch             " Highlight previous search results
+set visualbell
+set wildmenu wildmode=longest:full
+syntax enable
+
+" Enable filetype plugin
+filetype plugin on
+filetype indent on
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>s saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast saving
+nmap <leader>s :w!<cr>
+set cmdheight=3 "The commandbar height
+
+set hid "Change buffer - without saving
+
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+set ignorecase "Ignore case when searching
+set smartcase
+set encoding=utf8
+try
+    lang en_US
+catch
+endtry
+set nobackup
+set nowb
+set noswapfile
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
+
+map j gj
+map k gk
+
+" Map space to / (search) and c-space to ? (backgwards search)
+map <space> /
+map <c-space> ?
+map <silent> <leader><cr> :noh<cr>
+
+" Smart way to move btw. windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Close the current buffer
+map <leader>bq :Bclose<cr>
+
+" Close all the buffers
+map <leader>ba :1,300 bd!<cr>
+
+" Use the arrows to something useful
+map <right> :bn<cr>
+map <left> :bp<cr>
+
+" Tab configuration
+map <leader>tn :tabnew! %<cr>
+map <leader>te :tabedit
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+
+" When pressing <leader>cd switch to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>
+
+"Remember open buffers on close
+set viminfo^=%
+"Remap VIM 0
+map 0 ^
+"Move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+let g:bufExplorerDefaultHelp=0
+let g:bufExplorerShowRelativePath=1
+let g:bufExplorerFindActive=1
+let g:bufExplorerSortBy='name'
+let g:miniBufExplUseSingleClick = 1
+let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplVSplit = 30
+"let g:miniBufExplSplitBelow=1
+map <leader>o :BufExplorer<cr>
+
+nore ; :
+nore , ;
+imap ii <C-[>
+map <leader>e :e! ~/.vimrc<cr>
+autocmd! bufwritepost .vimrc source ~/.vimrc
+set ignorecase
+set smartcase
+" Bash like keys for the command line
+cnoremap <C-A>      <Home>
+cnoremap <C-E>      <End>
+cnoremap <C-K>      <C-U>
+
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
+" inoremap $1 ()<esc>i
+" inoremap $2 []<esc>i
+" inoremap $3 {}<esc>i
+" inoremap $4 {<esc>o}<esc>O
+" inoremap $q ''<esc>i
+" inoremap $e ""<esc>i
+" inoremap $t <><esc>i
+
+map 0 ^
+
+" Delete traling white spaces
+autocmd FileType java,soy,js autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+" map <leader>p :setlocal paste!<cr>
+
+" 100 character limit
+highlight overlength ctermbg=red ctermfg=white guibg=#592929
+match overlength /\%101v.\+/
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+  autocmd GUIEnter * set visualbell t_vb=
+endif
+
+" This will copy contents by default to clipboard
+set clipboard=unnamedplus
+
+map <leader>g :execute "noautocmd vimgrep /" . expand("<cword>") . "/gj **/*." .  expand("%:e") <Bar> cw<CR>
+map <leader>d :execute 'NERDTreeToggle ' . getcwd()<CR>
+
+if has("gui_running")
+  set nomousehide
+  behave mswin
+  set cursorline
+  set background=light
+  set guioptions+=a
+  set guioptions-=m
+  set guioptions-=T
+  map <silent> <F2> :if &guioptions =~# 'T' <Bar>
+  \set guioptions-=T <Bar>
+  \set guioptions-=m <bar>
+  \else <Bar>
+  \set guioptions+=T <Bar>
+  \set guioptions+=m <Bar>
+  \endif<CR>
+  set guioptions-=l
+  set guioptions-=L
+  set guioptions-=r  "remove right-hand scroll bar
+endif
+
+
+" Auto correct words
+iab notificaiton notification
+iab Notificaiton Notification
+iab NOTIFICAITON NOTIFICATION
+iab optoin option
+
+
+" Enable spell checking, even in program source files. Hit <F4> to
+" highlight spelling errors. Hit it again to turn highlighting off. Type
+"     :help spell
+" to read the manual, here is a brief reminder:
+" ]s Next misspelled word
+" [s Previous misspelled word
+" z= Make suggestions for current word
+" zg Add to good words list
+setlocal spell spelllang=en_us  " American English spelling.
+set spellfile=~/.words.utf8.add " My own word list is saved here.
+
+" Toggle spelling with F4 key.
+map <F4> :set spell!<CR><Bar>:echo "Spell check: " .
+  \ strpart("OffOn", 3 * &spell, 3)<CR>
+
+" Change the default highlighting colors and terminal attributes
+highlight SpellBad cterm=underline ctermfg=yellow ctermbg=gray
+
+" Limit list of suggestions to the top 10 items
+set spellsuggest=best,10
+
+" Uncomment the next line, if you wish spelling to be off by default.
+set nospell
+
+" Search and replace the word under the cursor
+" http://vim.wikia.com/wiki/Search_and_replace_the_word_under_the_cursor
+:nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
+
+" Remove traling white space.
+map <F2> :%s/[ ]\+$//gc<CR>
+
+
+" Enables dragging window borders with mouse
+set mouse=a
+
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger = "<c-o>"
+let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
+Bundle 'flazz/vim-colorschemes'
+Bundle 'sickill/vim-monokai'
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
+
