@@ -2,11 +2,9 @@
 setw -g monitor-activity on
 set -g visual-activity on
 
-
 # color
 set -g default-terminal "screen-256color"
 # status bar
-set-option -g status-utf8 on
 
 set-option -g status-bg colour235 #base02
 set-option -g status-fg colour136 #yellow
