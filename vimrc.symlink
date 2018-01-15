@@ -272,3 +272,9 @@ endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
 
+" turn off cursor column
+" set cursorcolumn
+set cursorline
+
+" show invisible chars
+set listchars=tab:>-,trail:·
