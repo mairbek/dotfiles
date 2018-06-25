@@ -262,6 +262,9 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 Bundle 'flazz/vim-colorschemes'
 Bundle 'sickill/vim-monokai'
 
+" Vundle
+Plugin 'elixir-editors/vim-elixir'
+
 function! NumberToggle()
   if(&relativenumber == 1)
     set number
@@ -278,3 +281,4 @@ set cursorline
 
 " show invisible chars
 set listchars=tab:>-,trail:·
+set paste
