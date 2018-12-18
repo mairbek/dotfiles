@@ -1,6 +1,9 @@
 [user]
 	name = Mairbek Khadikov
 	email=mkhadikov@gmail.com
+	signingkey = A81366A2D5DDD04B
 [core]
         editor = vim
 
+[commit]
+	gpgsign = true
