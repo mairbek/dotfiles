@@ -1,4 +1,8 @@
 [user]
 	name = Mairbek Khadikov
+	signingkey = AC0AAD64943B8374
+	email = mkhadikov@gmail.com
 [core]
         editor = vim
+[url "git@github.com:"]
+	insteadOf = https://github.com

@@ -59,4 +59,4 @@ bind k select-pane -U
 bind l select-pane -R
 
 # reload config without killing server
-bind R source-file ~/.tmux.conf \; display-message "[tmux configuration reloaded]"
+#bind R source-file ~/.tmux.conf \; display-message "[tmux configuration reloaded]"
